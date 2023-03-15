@@ -36,7 +36,9 @@ public class estruturaif4 {
 			}
 			
 			else {
-				System.out.println("\nO salario não está na tabela");
+				aliquota = (7507.49 * 14.0)/100;
+				System.out.println("\nO salario informado foi: " +salario);
+				System.out.println("\nO seu aliquota é de:  " +aliquota);
 			}
 	}
 
