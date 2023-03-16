@@ -1,13 +1,18 @@
 package br.com.poo.estruturarepeticao;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Tabuada extends JFrame {
 
+	static String dados = "";
 	public static void main(String[] args) {
 			/*
 			 * Gerando um objeto de Janela baseando na classe
@@ -70,6 +75,27 @@ public class Tabuada extends JFrame {
 			JButton btnCalcular = new JButton("Calcular");
 			btnCalcular.setBounds(250,5,200,30);
 			janela.add(btnCalcular);
+			
+			btnCalcular.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+						
+						for(int i = 1; i <= 10 ; i++) {
+							
+								dados += txtNumero.getText() + "x"+ i + "=" + Integer.parseInt(txtNumero.getText()) * i + "\n";
+								
+								
+							
+						}
+				
+						
+						txtResultado.setText(dados);
+						txtNumero.setText("");
+						dados = ""; //Limpar a variavel dados
+					
+				}
+			});
 			
 			//comando para mostrar a janela
 			janela.setVisible(true);
