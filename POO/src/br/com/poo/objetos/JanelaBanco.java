@@ -64,6 +64,13 @@ public class JanelaBanco extends JFrame {
 		contentPane.add(btnPoupanca);
 		
 		JButton btnCorrente = new JButton("Corrente");
+		btnCorrente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Corrente jc = new Corrente();
+				jc.setVisible(true);
+			}
+		});
 		btnCorrente.setFont(new Font("Tahoma", Font.BOLD, 28));
 		btnCorrente.setForeground(new Color(249, 81, 0));
 		btnCorrente.setBackground(Color.WHITE);

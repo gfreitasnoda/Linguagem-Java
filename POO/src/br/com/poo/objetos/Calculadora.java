@@ -31,8 +31,11 @@ public class Calculadora extends JFrame {
 	private JButton btnSub;
 	private JLabel lblResultado;
 	private String resultado;
-	private double valor1;
-	private double valor2;
+	private String valor1;
+	private String valor2;
+	private String operacao;
+	private double num1;
+	private double num2;
 	
 	/**
 	 * Launch the application.
@@ -56,6 +59,9 @@ public class Calculadora extends JFrame {
 	public Calculadora() {
 		
 		resultado = "";
+		valor1 = "";
+		valor2 = "";
+		operacao = "";
 		
 		setResizable(false);
 		setTitle("Calculadora");
@@ -73,34 +79,100 @@ public class Calculadora extends JFrame {
 		contentPane.add(lblResultado);
 		
 		JButton btnMultiplicacao = new JButton("x");
+		btnMultiplicacao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				valor1 = lblResultado.getText();
+				operacao = "*";
+				lblResultado.setText("");
+			}
+		});
 		btnMultiplicacao.setBackground(new Color(192, 192, 192));
 		btnMultiplicacao.setFont(new Font("Perpetua Titling MT", Font.PLAIN, 31));
 		btnMultiplicacao.setBounds(271, 195, 88, 65);
 		contentPane.add(btnMultiplicacao);
 		
-		JButton btnDivisao = new JButton("÷");
+		JButton btnDivisao = new JButton("/");
+		btnDivisao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				valor1 = lblResultado.getText();
+				operacao = "/";
+				lblResultado.setText("");
+				
+				
+				
+			}
+		});
 		btnDivisao.setBackground(new Color(192, 192, 192));
 		btnDivisao.setFont(new Font("Tahoma", Font.PLAIN, 31));
 		btnDivisao.setBounds(271, 119, 88, 65);
 		contentPane.add(btnDivisao);
 		
 		JButton btnAdicao = new JButton("+");
+		btnAdicao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				valor1 = lblResultado.getText();
+				operacao = "+";
+				lblResultado.setText("");
+			}
+		});
 		btnAdicao.setBackground(new Color(192, 192, 192));
 		btnAdicao.setFont(new Font("Perpetua Titling MT", Font.PLAIN, 31));
 		btnAdicao.setBounds(271, 271, 88, 65);
 		contentPane.add(btnAdicao);
 		
 		JButton btnSub = new JButton("-");
+		btnSub.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				valor1 = lblResultado.getText();
+				operacao = "-";
+				lblResultado.setText("");
+			}
+		});
 		btnSub.setBackground(new Color(192, 192, 192));
 		btnSub.setFont(new Font("Perpetua Titling MT", Font.PLAIN, 31));
 		btnSub.setBounds(271, 347, 88, 65);
 		contentPane.add(btnSub);
 		
-		JButton btnSub_1 = new JButton("=");
-		btnSub_1.setBackground(new Color(255, 128, 64));
-		btnSub_1.setFont(new Font("Tahoma", Font.PLAIN, 31));
-		btnSub_1.setBounds(271, 423, 88, 88);
-		contentPane.add(btnSub_1);
+		JButton btnIgual = new JButton("=");
+		btnIgual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				valor2 = lblResultado.getText();
+				int num = Integer.parseInt(valor1);
+				int num2 = Integer.parseInt(valor2);
+				
+				switch(operacao) {
+				 
+				case "/":
+					resultado = "valor1 / valor2" + operacao;
+				break;
+				
+				case "+":
+					resultado = "valor1 + valor2"+operacao ;
+				break;
+				
+				case "-":
+					resultado = "valor1 - valor2"+operacao;
+				break;
+				
+				case "*":
+					resultado = "valor1 * valor2"+operacao;
+				break;	
+					
+					
+					
+				}
+				
+			}
+		});
+		btnIgual.setBackground(new Color(255, 128, 64));
+		btnIgual.setFont(new Font("Tahoma", Font.PLAIN, 31));
+		btnIgual.setBounds(271, 423, 88, 88);
+		contentPane.add(btnIgual);
 		
 		JButton btnUm = new JButton("1");
 		btnUm.setBackground(new Color(192, 192, 192));
@@ -310,6 +382,13 @@ public class Calculadora extends JFrame {
 		
 		
 		JButton btnLimpa = new JButton("CE");
+		btnLimpa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				lblResultado.setText("");
+				
+			}
+		});
 		btnLimpa.setBackground(new Color(139, 217, 245));
 		btnLimpa.setFont(new Font("Tahoma", Font.PLAIN, 38));
 		btnLimpa.setBounds(94, 426, 158, 85);

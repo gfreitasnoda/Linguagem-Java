@@ -1,19 +1,21 @@
 package br.com.poo.objetos;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import br.com.poo.classes.heranca.ContaPoupanca;
 
 public class Poupanca extends JFrame {
 
@@ -28,12 +30,15 @@ public class Poupanca extends JFrame {
 	private JButton btnSaldo;
 	private JButton btnSacar;
 	private JButton btnDeposito;
-
+	private ContaPoupanca cp;
 
 	/**
 	 * Create the frame.
 	 */
 	public Poupanca() {
+		
+		cp = new ContaPoupanca();
+		
 		setTitle("Janela Poupança");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 705, 471);
@@ -170,6 +175,33 @@ public class Poupanca extends JFrame {
 		contentPane.add(txtRendimento);
 		
 		btnSaldo = new JButton("Verificar Saldo");
+		btnSaldo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					
+				if(btnSaldo.getText().equals("Abrir Conta")) {
+					cp.setNumeroBanco(Long.parseLong(txtNumeroBanco.getText()));
+					cp.setAgencia(Integer.parseInt(txtAgencia.getText()));
+					cp.setTitular(txtTitular.getText());
+					cp.setSaldo(Double.parseDouble(txtSaldoInicial.getText()));
+					
+					btnSaldo.setText("Verificar Saldo");
+					
+					txtNumeroBanco.setEnabled(false);
+					txtAgencia.setEditable(false);
+					txtTitular.setEditable(false);
+					txtSaldoInicial.setEditable(false);
+					txtRendimento.setEditable(false);
+					
+					btnDeposito.setEnabled(true);
+					btnSacar.setEnabled(true);
+					txtValor.setEnabled(true);
+					
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Seu dado é R$ "+cp.getSaldo());
+				}
+			}
+		});
 		btnSaldo.setForeground(new Color(249, 81, 0));
 		btnSaldo.setBackground(Color.WHITE);
 		btnSaldo.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 18));
@@ -178,6 +210,13 @@ public class Poupanca extends JFrame {
 		btnSaldo.setEnabled(false);
 		
 		btnSacar = new JButton("Sacar");
+		btnSacar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JOptionPane.showMessageDialog(null, cp.sacar(Double.parseDouble(txtValor.getText())));
+				
+			}
+		});
 		btnSacar.setForeground(new Color(249, 81, 0));
 		btnSacar.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 18));
 		btnSacar.setBackground(Color.WHITE);
@@ -186,6 +225,13 @@ public class Poupanca extends JFrame {
 		btnSacar.setEnabled(false);
 		
 		btnDeposito = new JButton("Deposito");
+		btnDeposito.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+					JOptionPane.showMessageDialog(null, cp.depositar(Double.parseDouble(txtValor.getText())));
+			
+			}
+		});
 		btnDeposito.setForeground(new Color(249, 81, 0));
 		btnDeposito.setFont(new Font("Yu Gothic UI Semibold", Font.BOLD, 18));
 		btnDeposito.setBackground(Color.WHITE);
@@ -200,7 +246,7 @@ public class Poupanca extends JFrame {
 		txtValor.setColumns(10);
 		txtValor.setEnabled(false);
 		
-		JLabel lblValorDeposito = new JLabel("Valor de Deposito:");
+		JLabel lblValorDeposito = new JLabel("Valor :");
 		lblValorDeposito.setForeground(Color.WHITE);
 		lblValorDeposito.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 25));
 		lblValorDeposito.setBounds(410, 265, 242, 43);
