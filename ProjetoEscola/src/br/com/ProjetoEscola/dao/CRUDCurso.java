@@ -198,7 +198,7 @@ public class CRUDCurso extends Conexao implements CRUD<Curso> {
 					pst.setString(2,obj.getDescricao());
 					pst.setDate(3, obj.getDatainicio());
 					pst.setDate(4, obj.getDatatermino());
-					pst.setString(1, obj.getHorarioinicio());
+					pst.setString(5, obj.getHorarioinicio());
 					pst.setString(6, obj.getHorariotermino());
 					pst.setLong(7, obj.getIdcurso());
 							

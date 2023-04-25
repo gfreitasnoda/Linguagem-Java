@@ -277,7 +277,7 @@ public class GerenciarCurso extends JFrame {
 							|| txtDataInicio.getText().trim().equals("")
 							|| txtDataTermino.getText().trim().equals("")
 								) {
-							JOptionPane.showMessageDialog(null, "Você precisa preendher todos os campos requisitados","Erro", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Você precisa preencher todos os campos requisitados","Erro", JOptionPane.ERROR_MESSAGE);
 					}
 					else {
 						cadcurso.setTitulo(txtTitulo.getText());
